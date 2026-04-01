@@ -1,97 +1,98 @@
 # 🚀 RedisLite — In-Memory Key-Value Store
 
-RedisLite is a lightweight, high-performance in-memory data store inspired by Redis.  
-This project explores core system design concepts such as network programming, concurrency, and efficient data handling by building a Redis-like server from scratch.
+> A Redis-inspired caching engine built from scratch to explore low-latency data access, protocol design, and backend systems engineering.
 
 ---
 
-## 🧠 Overview
+## 🧠 Architecture
 
-RedisLite is designed to mimic the fundamental behavior of Redis by implementing:
+```mermaid
+flowchart LR
+    A[Client] --> B[TCP Server]
+    B --> C[RESP Parser]
+    C --> D[Command Engine]
+    D --> E[In-Memory Store]
+    E --> F[Persistence (RDB)]
+```
 
-- A TCP server capable of handling multiple client connections  
-- Parsing and processing of the Redis Serialization Protocol (RESP)  
-- Core Redis commands for data storage and retrieval  
-- In-memory data structures optimized for low-latency access  
+```mermaid
+    sequenceDiagram
+    participant C as Client
+    participant S as Server
+    participant P as Parser
+    participant M as Memory
 
-This project focuses on understanding **how real-world caching systems work internally**, rather than just using them.
+    C->>S: SET key value
+    S->>P: Parse RESP
+    P->>M: Store Data
+    M-->>S: OK
+    S-->>C: Response
+```
 
----
+## 🧩 What I Built
 
-## ⚙️ Features
-
-### 🔹 Core Functionality
-- Implemented a TCP server that listens for incoming client connections  
-- Built support for handling multiple clients concurrently  
-- Designed a command processing engine for:
-  - `PING` — connectivity check  
-  - `ECHO` — message reflection  
-  - `SET` — store key-value pairs  
-  - `GET` — retrieve stored values  
-
-### 🔹 Protocol Handling
-- Implemented parsing and encoding of the **Redis Serialization Protocol (RESP)**  
-- Enabled seamless interaction with official Redis CLI (`redis-cli`)  
-
-### 🔹 Data Management
-- Designed an in-memory key-value store for O(1) data access  
-- Added support for **automatic key expiration (TTL)**  
-
----
-
-## 🚀 Advanced Concepts Implemented
-
-- 🔁 Replication (master-replica architecture basics)  
-- 💾 RDB-style persistence (snapshotting data to disk)  
-- 🔒 Atomic operations for safe concurrent execution  
-- 🧩 Extensible architecture for additional data structures  
+- Custom **TCP server** handling multiple client connections  
+- Full **RESP protocol parser** (Redis-compatible)  
+- Core commands: `PING`, `ECHO`, `SET`, `GET`  
+- **In-memory key-value engine** with O(1) access  
+- **TTL-based expiration system**  
+- Basic **RDB-style persistence**  
 
 ---
 
-## 🏗️ System Design Highlights
+## 📊 Performance
 
-- Built using **low-level networking (TCP sockets)**  
-- Implemented **concurrent client handling**  
-- Designed modular components for:
-  - Command parsing  
-  - Data storage  
-  - Client communication  
+| Operation | Complexity |
+|----------|-----------|
+| GET      | O(1)      |
+| SET      | O(1)      |
+| EXPIRE   | O(1)      |
 
----
-
-## 📦 Tech Stack
-
-- Language: *Python*  
-- Networking: TCP Sockets  
-- Protocol: RESP (Redis Serialization Protocol)  
-- Concepts: Concurrency, System Design, In-Memory Databases  
+> Optimized for low-latency reads using direct memory access.
 
 ---
 
-## ⚡ Why This Project Matters
+## 📈 Engineering Insights
 
-Modern applications rely heavily on caching systems like Redis for:
+- RAM-based storage eliminates disk I/O bottlenecks  
+- Direct key lookup ensures constant-time performance  
+- RESP protocol enables compatibility with `redis-cli`  
+- Designed for extensibility (replication, clustering)  
 
-- Reducing latency  
-- Scaling backend systems  
-- Handling high-throughput workloads  
+---
 
-RedisLite demonstrates a deep understanding of:
-- How caching systems operate internally  
-- How distributed systems manage data efficiently  
-- How real-world infrastructure tools are built  
+## 🧱 Why This Was Challenging
+
+- Designing a **TCP server from scratch**  
+- Implementing a **binary-safe protocol (RESP)**  
+- Handling **multiple concurrent clients**  
+- Managing **memory vs performance trade-offs**  
 
 ---
 
 ## 🧪 Example Usage
 
 ```bash
-$ redis-cli
-127.0.0.1:6379> PING
+> PING
 PONG
 
-127.0.0.1:6379> SET name Aayush
+> SET name Aayush
 OK
 
-127.0.0.1:6379> GET name
+> GET name
 "Aayush"
+```
+
+## 🚀 Future Improvements
+
+
+-LRU cache eviction
+-Distributed replication
+-Pub/Sub messaging
+-Benchmarking vs Redis
+
+---
+
+## 👨‍💻 Summary
+
+- This project explores how real-world systems like Redis are built internally — from networking and protocol design to high-performance data handling.
