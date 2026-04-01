@@ -8,25 +8,25 @@
 
 ```mermaid
 flowchart LR
-    A[Client] --> B[TCP Server]
-    B --> C[RESP Parser]
-    C --> D[Command Engine]
-    D --> E[In-Memory Store]
-    E --> F[Persistence (RDB)]
+A[Client] --> B[TCP Server]
+B --> C[RESP Parser]
+C --> D[Command Engine]
+D --> E[In-Memory Store]
+E --> F[Persistence (RDB)]
 ```
 
 ```mermaid
-    sequenceDiagram
-    participant C as Client
-    participant S as Server
-    participant P as Parser
-    participant M as Memory
+sequenceDiagram
+participant C as Client
+participant S as Server
+participant P as Parser
+participant M as Memory
 
-    C->>S: SET key value
-    S->>P: Parse RESP
-    P->>M: Store Data
-    M-->>S: OK
-    S-->>C: Response
+C->>S: SET key value
+S->>P: Parse RESP
+P->>M: Store Data
+M-->>S: OK
+S-->>C: Response
 ```
 
 ## 🧩 What I Built
