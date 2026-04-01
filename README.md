@@ -61,7 +61,7 @@ This project focuses on understanding **how real-world caching systems work inte
 
 ## 📦 Tech Stack
 
-- Language: *(Add your language here — Python / C++ / etc.)*  
+- Language: *Python*  
 - Networking: TCP Sockets  
 - Protocol: RESP (Redis Serialization Protocol)  
 - Concepts: Concurrency, System Design, In-Memory Databases  
