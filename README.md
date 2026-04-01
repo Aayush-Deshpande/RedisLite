@@ -8,11 +8,11 @@
 
 ```mermaid
 flowchart LR
-A[Client] --> B[TCP Server]
-B --> C[RESP Parser]
-C --> D[Command Engine]
-D --> E[In-Memory Store]
-E --> F[Persistence (RDB)]
+A[Client] --> B["TCP Server"]
+B --> C["RESP Parser"]
+C --> D["Command Engine"]
+D --> E["In-Memory Store"]
+E --> F["Persistence (RDB)"]
 ```
 
 ```mermaid
