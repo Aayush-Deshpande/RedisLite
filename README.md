@@ -85,11 +85,10 @@ OK
 
 ## 🚀 Future Improvements
 
-
--LRU cache eviction
--Distributed replication
--Pub/Sub messaging
--Benchmarking vs Redis
+- LRU cache eviction
+- Distributed replication
+- Pub/Sub messaging
+- Benchmarking vs Redis
 
 ---
 
